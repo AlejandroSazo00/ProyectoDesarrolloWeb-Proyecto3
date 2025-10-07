@@ -15,7 +15,7 @@ app.use(morgan('combined'));
 
 // CORS
 app.use(cors({
-  origin: ['http://localhost:4200', 'http://localhost:3000'],
+  origin: ['http://104.131.96.162:4200', 'http://104.131.96.162:3000'],
   credentials: true
 }));
 
