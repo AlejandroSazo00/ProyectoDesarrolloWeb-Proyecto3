@@ -1,0 +1,311 @@
+.scoreboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.game-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 20px;
+  align-items: start;
+  min-height: 400px;
+}
+
+.team-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  border: 3px solid transparent;
+  text-align: center;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.local-team {
+  border-color: #2196F3;
+  background: linear-gradient(135deg, #E3F2FD 0%, #FFFFFF 100%);
+  position: relative;
+}
+
+/* Removed ContarLocal background image from team card */
+
+.visitante-team {
+  border-color: #FF5722;
+  background: linear-gradient(135deg, #FFEBEE 0%, #FFFFFF 100%);
+  position: relative;
+}
+
+/* Removed ContarVisita background image from team card */
+
+.team-header h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin: 0 0 20px 0;
+  font-weight: 600;
+}
+
+.score-display {
+  font-size: 6rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin: 30px 0;
+  font-family: 'Arial', sans-serif;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.local-team .score-display {
+  color: #1976D2;
+}
+
+.visitante-team .score-display {
+  color: #D32F2F;
+}
+
+.score-display:hover {
+  transform: scale(1.05);
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn {
+  min-height: 48px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 12px 24px;
+}
+
+.btn-success {
+  background-color: #4CAF50;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-info {
+  background-color: #2196F3;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #3F51B5;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-success:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+.btn-info:hover {
+  background-color: #1976D2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: #303F9F;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(63, 81, 181, 0.3);
+}
+
+.btn-danger {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
+}
+
+.fouls-section {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.fouls-display {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  color: #212529;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
+}
+
+/* Basketball Court Styles */
+.court-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 400px;
+}
+
+.court-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.court-image {
+  width: 100%;
+  height: auto;
+  opacity: 0.7;
+  margin: 20px 0;
+  pointer-events: none;
+  display: block;
+  border-radius: 15px;
+}
+
+.court-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Removed ContarLocal and ContarVisita images */
+
+.ball-image {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: bounce 2s infinite ease-in-out;
+}
+
+.player1-image {
+  position: absolute;
+  width: 60px;
+  height: auto;
+  top: 30%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  opacity: 0.8;
+}
+
+.player2-image {
+  position: absolute;
+  width: 60px;
+  height: auto;
+  top: 70%;
+  right: 20%;
+  transform: translate(50%, -50%);
+  opacity: 0.8;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .game-layout {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .court-section {
+    order: -1;
+    padding: 10px;
+  }
+  
+  .court-container {
+    max-width: 300px;
+  }
+  
+  .ball-image {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .player1-image,
+  .player2-image {
+    width: 45px;
+  }
+  
+  .scoreboard-container {
+    padding: 10px;
+  }
+  
+  .score-display {
+    font-size: 3rem;
+  }
+  
+  .team-card {
+    min-height: 250px;
+    padding: 15px;
+  }
+  
+  .button-group {
+    gap: 8px;
+  }
+  
+  .button-group button {
+    min-height: 44px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .score-display {
+    font-size: 2.5rem;
+  }
+  
+  .team-card {
+    min-height: 200px;
+    padding: 10px;
+  }
+  
+  mat-card-title {
+    font-size: 1.5rem;
+  }
+}

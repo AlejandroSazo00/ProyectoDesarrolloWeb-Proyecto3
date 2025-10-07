@@ -1,0 +1,222 @@
+services:
+  # ==================== BASES DE DATOS ====================
+  
+  # MongoDB para Auth Service
+  mongodb:
+    image: mongo:7.0
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: basketball123
+      MONGO_INITDB_DATABASE: basketball_auth
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - basketball-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # PostgreSQL para Teams Service
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: basketball_teams
+      POSTGRES_USER: basketball_user
+      POSTGRES_PASSWORD: basketball_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - basketball-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U basketball_user -d basketball_teams"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # MySQL para Players Service
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: basketball_players
+      MYSQL_USER: basketball_user
+      MYSQL_PASSWORD: basketball_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - basketball-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # SQL Server para Matches y Reports
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: YourStrong@Passw0rd
+      MSSQL_PID: Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+    networks:
+      - basketball-network
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools18/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "YourStrong@Passw0rd", "-C", "-Q", "SELECT 1"]
+      interval: 30s
+      retries: 5
+      start_period: 60s
+      timeout: 10s
+
+  # ==================== MICROSERVICIOS ====================
+
+  # Auth Service (Node.js + MongoDB)
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      MONGODB_URI: mongodb://admin:basketball123@mongodb:27017/basketball_auth?authSource=admin
+      JWT_SECRET: basketball-secret-key-2024-super-secure
+      PORT: 3001
+    networks:
+      - basketball-network
+
+  # Teams Service (Java Spring Boot + PostgreSQL)
+  teams-service:
+    build:
+      context: ./teams-service
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      DB_USERNAME: basketball_user
+      DB_PASSWORD: basketball_pass
+      JWT_SECRET: basketball-secret-key-2024-super-secure
+    networks:
+      - basketball-network
+
+  # Players Service (PHP Laravel + MySQL)
+  players-service:
+    build:
+      context: ./players-service
+      dockerfile: Dockerfile
+    ports:
+      - "3003:80"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      APP_ENV: production
+      DB_HOST: mysql
+      DB_DATABASE: basketball_players
+      DB_USERNAME: basketball_user
+      DB_PASSWORD: basketball_pass
+      JWT_SECRET: basketball-jwt-secret-key-2024-super-secure
+    networks:
+      - basketball-network
+
+  # Basketball API - Matches Service (.NET Core + SQL Server)
+  basketball-api:
+    build:
+      context: ./BasketballScoreboardAPI
+      dockerfile: Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Server=sql-server,1433;Database=BasketballScoreboardDB;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=true;"
+    ports:
+      - "5163:8080"
+    depends_on:
+      sql-server:
+        condition: service_healthy
+    networks:
+      - basketball-network
+
+  # Report Service (Python FastAPI + SQL Server)
+  report-service:
+    build:
+      context: ./report-service
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      sql-server:
+        condition: service_healthy
+    environment:
+      DB_SERVER: sql-server
+      DB_NAME: BasketballScoreboardDB
+      DB_USER: sa
+      DB_PASSWORD: YourStrong@Passw0rd
+      DB_PORT: 1433
+      JWT_SECRET: your-super-secret-key-for-jwt-tokens-basketball-2024
+    networks:
+      - basketball-network
+    volumes:
+      - ./report-service/temp:/tmp/reports
+
+  # API Gateway (Node.js)
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - auth-service
+      - teams-service
+      - players-service
+      - basketball-api
+      - report-service
+    environment:
+      NODE_ENV: production
+      AUTH_SERVICE_URL: http://auth-service:3001
+      TEAMS_SERVICE_URL: http://teams-service:3002
+      PLAYERS_SERVICE_URL: http://players-service:80
+      MATCHES_SERVICE_URL: http://basketball-api:8080
+      REPORTS_SERVICE_URL: http://report-service:8000
+      PORT: 3000
+    networks:
+      - basketball-network
+
+  # Frontend Angular
+  basketball-frontend:
+    build:
+      context: ./basketball-scoreboard
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    depends_on:
+      - api-gateway
+    networks:
+      - basketball-network
+
+networks:
+  basketball-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+  postgres_data:
+  mysql_data:
+  sql_data:

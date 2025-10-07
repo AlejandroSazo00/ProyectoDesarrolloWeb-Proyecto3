@@ -1,0 +1,18 @@
+# Dependencias 
+node_modules/ 
+package-lock.json 
+ 
+# Build outputs 
+dist/ 
+bin/ 
+obj/ 
+ 
+# IDE 
+.vs/ 
+.vscode/ 
+ 
+# Angular 
+.angular/ 
+ 
+# Logs 
+*.log 

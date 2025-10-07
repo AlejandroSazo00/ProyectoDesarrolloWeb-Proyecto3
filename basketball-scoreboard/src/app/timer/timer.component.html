@@ -1,0 +1,59 @@
+<div class="timer-container">
+  <div class="quarter-display">
+    Cuarto {{ currentQuarter }}
+  </div>
+  
+  <div class="timer-display" [ngClass]="timerClass">
+    {{ displayTime }}
+  </div>
+  
+  <div class="timer-controls">
+    <button 
+      class="btn btn-success" 
+      (click)="start()" 
+      [disabled]="isRunning || totalSeconds === 0">
+      Start
+    </button>
+    
+    <button 
+      class="btn btn-warning" 
+      (click)="pause()" 
+      [disabled]="!isRunning">
+      Pause
+    </button>
+    
+    <button 
+      class="btn btn-secondary" 
+      (click)="reset()">
+      Reset
+    </button>
+    
+    <button 
+      class="btn btn-primary" 
+      (click)="nextQuarter()" 
+      [disabled]="currentQuarter >= 4">
+      Siguiente Cuarto
+    </button>
+    
+    <button 
+      class="btn btn-dark" 
+      (click)="resetGame()">
+      Nuevo Juego
+    </button>
+    
+    <button 
+      class="btn btn-info" 
+      (click)="showWinner()">
+      El ganador es
+    </button>
+  </div>
+  
+  <div class="winner-display" *ngIf="winnerInfo">
+    <div class="winner-card">
+      <h3>🏆 {{ winnerInfo.winner }}</h3>
+      <p><strong>Puntaje:</strong> {{ winnerInfo.score }}</p>
+      <p><strong>Faltas:</strong> {{ winnerInfo.fouls }}</p>
+      <button class="btn btn-sm btn-secondary" (click)="closeWinner()">Cerrar</button>
+    </div>
+  </div>
+</div>
