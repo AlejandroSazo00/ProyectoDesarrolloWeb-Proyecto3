@@ -269,7 +269,7 @@ export class EquiposComponent implements OnInit {
   }
 
   loadEquipos() {
-    this.http.get<Equipo[]>('http://localhost:5163/api/equipos').subscribe({
+    this.http.get<Equipo[]>('http://104.131.96.162:5163/api/equipos').subscribe({
       next: (equipos) => this.equipos = equipos,
       error: (err) => console.error('Error loading equipos:', err)
     });
@@ -286,7 +286,7 @@ export class EquiposComponent implements OnInit {
         activo: this.currentEquipo.activo
       };
       
-      this.http.put<Equipo>(`http://localhost:5163/api/equipos/${this.currentEquipo.id}`, updateData).subscribe({
+      this.http.put<Equipo>(`http://104.131.96.162:5163/api/equipos/${this.currentEquipo.id}`, updateData).subscribe({
         next: () => {
           this.loadEquipos();
           this.cancelEdit();
@@ -302,7 +302,7 @@ export class EquiposComponent implements OnInit {
         colorSecundario: this.currentEquipo.colorSecundario
       };
       
-      this.http.post<Equipo>('http://localhost:5163/api/equipos', createData).subscribe({
+      this.http.post<Equipo>('http://104.131.96.162:5163/api/equipos', createData).subscribe({
         next: () => {
           this.loadEquipos();
           this.cancelEdit();
@@ -319,7 +319,7 @@ export class EquiposComponent implements OnInit {
 
   deleteEquipo(id: number) {
     if (confirm('¿Estás seguro de eliminar este equipo?')) {
-      this.http.delete(`http://localhost:5163/api/equipos/${id}`).subscribe({
+      this.http.delete(`http://104.131.96.162:5163/api/equipos/${id}`).subscribe({
         next: () => this.loadEquipos(),
         error: (err) => console.error('Error deleting equipo:', err)
       });

@@ -342,19 +342,19 @@ export class DashboardComponent implements OnInit {
 
   loadStats() {
     // Cargar estadísticas de equipos
-    this.http.get<any[]>('http://localhost:5163/api/equipos').subscribe({
+    this.http.get<any[]>('http://104.131.96.162:5163/api/equipos').subscribe({
       next: (equipos) => this.stats.totalEquipos = equipos.length,
       error: (err) => console.error('Error loading equipos stats:', err)
     });
 
     // Cargar estadísticas de jugadores
-    this.http.get<any[]>('http://localhost:5163/api/jugadores').subscribe({
+    this.http.get<any[]>('http://104.131.96.162:5163/api/jugadores').subscribe({
       next: (jugadores) => this.stats.totalJugadores = jugadores.length,
       error: (err) => console.error('Error loading jugadores stats:', err)
     });
 
     // Cargar estadísticas de partidos
-    this.http.get<any>('http://localhost:5163/api/admin/partidos').subscribe({
+    this.http.get<any>('http://104.131.96.162:5163/api/admin/partidos').subscribe({
       next: (response) => {
         const partidos = response.partidos || response || [];
         this.stats.totalPartidos = partidos.length;

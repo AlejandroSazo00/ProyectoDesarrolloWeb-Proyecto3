@@ -357,14 +357,14 @@ export class JugadoresComponent implements OnInit {
   }
 
   loadEquipos() {
-    this.http.get<Equipo[]>('http://localhost:5163/api/equipos').subscribe({
+    this.http.get<Equipo[]>('http://104.131.96.162:5163/api/equipos').subscribe({
       next: (equipos) => this.equipos = equipos,
       error: (err) => console.error('Error loading equipos:', err)
     });
   }
 
   loadJugadores() {
-    this.http.get<Jugador[]>('http://localhost:5163/api/jugadores').subscribe({
+    this.http.get<Jugador[]>('http://104.131.96.162:5163/api/jugadores').subscribe({
       next: (jugadores) => {
         this.jugadores = jugadores;
         this.jugadoresFiltrados = jugadores;
@@ -410,7 +410,7 @@ export class JugadoresComponent implements OnInit {
         activo: this.currentJugador.activo
       };
       
-      this.http.put<Jugador>(`http://localhost:5163/api/jugadores/${this.currentJugador.id}`, updateData).subscribe({
+      this.http.put<Jugador>(`http://104.131.96.162:5163/api/jugadores/${this.currentJugador.id}`, updateData).subscribe({
         next: () => {
           this.loadJugadores();
           this.cancelEdit();
@@ -435,7 +435,7 @@ export class JugadoresComponent implements OnInit {
         nacionalidad: this.currentJugador.nacionalidad
       };
       
-      this.http.post<Jugador>('http://localhost:5163/api/jugadores', createData).subscribe({
+      this.http.post<Jugador>('http://104.131.96.162:5163/api/jugadores', createData).subscribe({
         next: () => {
           this.loadJugadores();
           this.cancelEdit();
@@ -465,7 +465,7 @@ export class JugadoresComponent implements OnInit {
 
   deleteJugador(id: number) {
     if (confirm('¿Estás seguro de eliminar este jugador?')) {
-      this.http.delete(`http://localhost:5163/api/jugadores/${id}`).subscribe({
+      this.http.delete(`http://104.131.96.162:5163/api/jugadores/${id}`).subscribe({
         next: () => this.loadJugadores(),
         error: (err) => console.error('Error deleting jugador:', err)
       });

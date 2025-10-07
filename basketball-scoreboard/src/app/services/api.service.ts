@@ -43,7 +43,7 @@ export interface UpdateFaltasDto {
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = 'http://localhost:5163/api';
+  private baseUrl = 'http://104.131.96.162:5163/api';
 
   constructor(private http: HttpClient) { }
 

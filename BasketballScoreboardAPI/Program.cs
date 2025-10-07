@@ -25,7 +25,8 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular", policy =>
     {
-        policy.WithOrigins("http://localhost:4200", "http://basketball-frontend", "http://104.131.96.162:4200")
+        policy.WithOrigins("http://localhost:4200", "http://basketball-frontend", "http://104.131.96.162:4200", "http://104.131.96.162")
+              .AllowAnyOrigin()
               .AllowAnyHeader()
               .AllowAnyMethod();
     });

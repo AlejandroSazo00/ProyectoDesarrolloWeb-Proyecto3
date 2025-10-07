@@ -377,14 +377,14 @@ export class PartidosComponent implements OnInit {
   }
 
   loadEquipos() {
-    this.http.get<Equipo[]>('http://localhost:5163/api/equipos').subscribe({
+    this.http.get<Equipo[]>('http://104.131.96.162:5163/api/equipos').subscribe({
       next: (equipos) => this.equipos = equipos,
       error: (err) => console.error('Error loading equipos:', err)
     });
   }
 
   loadPartidos() {
-    this.http.get<any>('http://localhost:5163/api/admin/partidos').subscribe({
+    this.http.get<any>('http://104.131.96.162:5163/api/admin/partidos').subscribe({
       next: (response) => this.partidos = response.partidos || response,
       error: (err) => console.error('Error loading partidos:', err)
     });
@@ -426,7 +426,7 @@ export class PartidosComponent implements OnInit {
         fecha: this.currentPartido.fecha
       };
       
-      this.http.put<Partido>(`http://localhost:5163/api/admin/partidos/${this.currentPartido.id}`, updateData).subscribe({
+      this.http.put<Partido>(`http://104.131.96.162:5163/api/admin/partidos/${this.currentPartido.id}`, updateData).subscribe({
         next: () => {
           this.loadPartidos();
           this.cancelEdit();
@@ -444,7 +444,7 @@ export class PartidosComponent implements OnInit {
         fecha: this.currentPartido.fecha
       };
       
-      this.http.post<Partido>('http://localhost:5163/api/admin/partidos', createData).subscribe({
+      this.http.post<Partido>('http://104.131.96.162:5163/api/admin/partidos', createData).subscribe({
         next: () => {
           this.loadPartidos();
           this.cancelEdit();
@@ -467,7 +467,7 @@ export class PartidosComponent implements OnInit {
 
   deletePartido(id: number) {
     if (confirm('¿Estás seguro de eliminar este partido?')) {
-      this.http.delete(`http://localhost:5163/api/admin/partidos/${id}`).subscribe({
+      this.http.delete(`http://104.131.96.162:5163/api/admin/partidos/${id}`).subscribe({
         next: () => this.loadPartidos(),
         error: (err) => console.error('Error deleting partido:', err)
       });
@@ -499,7 +499,7 @@ export class PartidosComponent implements OnInit {
         marcadorFinalVisitante: parseInt(marcadorVisitante)
       };
       
-      this.http.post(`http://localhost:5163/api/admin/partidos/${partido.id}/finalizar`, finalData).subscribe({
+      this.http.post(`http://104.131.96.162:5163/api/admin/partidos/${partido.id}/finalizar`, finalData).subscribe({
         next: () => this.loadPartidos(),
         error: (err) => console.error('Error finalizando partido:', err)
       });

@@ -21,7 +21,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(username: string, password: string) {
-    return this.http.post<LoginResponse>('http://localhost:5163/api/auth/login', { username, password });
+    return this.http.post<LoginResponse>('http://104.131.96.162:5163/api/auth/login', { username, password });
   }
 
   saveSession(token: string, expiresAt: string, role?: string) {
