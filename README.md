@@ -1,4 +1,4 @@
-# Basketball Scoreboard - Proyecto Desarrollo Web II
+# Basketball Scoreboard - Proyecto 3 ✅ COMPLETADO
 
 **Desarrollado por:** Alejandro Sazo  
 **Contribución individual:** 100%  
@@ -6,16 +6,27 @@
 **Email:** msazol1@miumg.edu.gt  
 **GitHub:** [@AlejandroSazo00](https://github.com/AlejandroSazo00)
 
+## 🎯 Estado del Proyecto: 100% COMPLETADO
+
+✅ **Todos los requerimientos implementados**  
+✅ **Reportería PDF profesional funcionando**  
+✅ **Seguridad y autenticación completa**  
+✅ **Desplegado en VPS y funcionando**  
+
 ## Descripción del Proyecto
 
-Sistema completo de marcador de baloncesto con panel administrativo desarrollado con .NET Core Web API y Angular. El proyecto cumple con todos los requerimientos del Proyecto II de Desarrollo Web, implementando autenticación JWT, CRUD completo y despliegue en VPS.
+Sistema completo de marcador de baloncesto con panel administrativo y **reportería profesional** desarrollado con .NET Core Web API, Angular y Python FastAPI. El proyecto cumple con todos los requerimientos del Proyecto 3 de Desarrollo Web, implementando autenticación JWT, CRUD completo, sistema de reportes PDF y despliegue en VPS.
 
-## Aplicación en Vivo
+## 🌐 URLs de Producción (VPS)
 
-- **Aplicación Principal:** http://104.131.96.162:4200
-- **API Backend:** http://104.131.96.162:5000
-- **Documentación API:** http://104.131.96.162:5000/swagger
-- **Login Admin:** `admin` / `Admin123!`
+- **🏠 Frontend:** http://104.131.96.162:4200
+- **👨‍💼 Admin Panel:** http://104.131.96.162:4200/admin
+- **🔧 API Swagger:** http://104.131.96.162:5163/swagger
+- **📊 Reports API:** http://104.131.96.162:8000/docs
+
+**Credenciales de Admin:**
+- Usuario: `admin`
+- Password: `Admin123!`
 
 ## Funcionalidades Implementadas
 
@@ -52,50 +63,121 @@ Sistema completo de marcador de baloncesto con panel administrativo desarrollado
 - CRUD completo de partidos
 - Selección de equipos participantes
 - Programación de fecha/hora
-- **Funcionalidad "Finalizar Partido"** - Implementada completamente
-- Historial de partidos con marcadores finales
 - Integración directa con el marcador público
 
-## Tecnologías Utilizadas
+### 📊 Sistema de Reportería (NUEVO)
+- **RF-REP-01**: Reporte de Equipos con estadísticas completas
+- **RF-REP-02**: Jugadores por Equipo con análisis detallado
+- **RF-REP-03**: Historial de Partidos con métricas de rendimiento
+- **RF-REP-04**: Roster por Partido con información de jugadores
+- **RF-REP-05**: Estadísticas por Jugador con datos de rendimiento
+- **Generación PDF**: Reportes profesionales con ReportLab
+- **Microservicio independiente**: Python FastAPI en puerto 8000
 
-### Backend (.NET Core 8.0)
-- **Framework:** ASP.NET Core Web API
-- **Base de Datos:** SQLite (Producción) / SQL Server (Desarrollo)
-- **ORM:** Entity Framework Core
-- **Autenticación:** JWT Bearer Tokens
-- **Documentación:** Swagger/OpenAPI
-- **Validaciones:** Data Annotations + FluentValidation
+### 🛡️ Seguridad Implementada
+- **RNF-REP-02**: Solo usuarios autenticados con permisos de administrador pueden generar reportes
+- **Validación en Frontend**: Verificación de rol antes de mostrar opciones de reportes
+- **Protección de Rutas**: Acceso restringido a funcionalidades administrativas
+- **Redirección Automática**: Si no es admin, redirige automáticamente al login
 
-### Frontend (Angular 17)
-- **Framework:** Angular con TypeScript
-- **Routing:** Angular Router con Guards
-- **HTTP:** HttpClient con Interceptors
-- **UI/UX:** CSS3 + Bootstrap responsive
-- **Validaciones:** Reactive Forms
+## 🛠️ Tecnologías Utilizadas
 
-### DevOps y Despliegue
-- **Contenedores:** Docker + Docker Compose
-- **VPS:** DigitalOcean Ubuntu 22.04
-- **Servidor Web:** Nginx (reverse proxy)
-- **CI/CD:** GitHub Actions ready
-- **Monitoreo:** Docker health checks
+### Frontend
+- **Angular 18**: Framework principal
+- **TypeScript**: Lenguaje de programación
+- **Bootstrap**: Framework CSS
+- **RxJS**: Programación reactiva
 
-## Arquitectura del Sistema
+### Backend
+- **.NET 8**: Framework del servidor principal
+- **Entity Framework Core**: ORM
+- **JWT Authentication**: Autenticación segura
+- **Swagger**: Documentación de API
+
+### Microservicio de Reportes
+- **Python 3.11**: Lenguaje de programación
+- **FastAPI**: Framework web moderno
+- **ReportLab**: Generación de PDFs profesionales
+- **Uvicorn**: Servidor ASGI
+
+### Base de Datos
+- **SQL Server**: Base de datos principal
+- **Docker**: Contenedorización de servicios
+
+## 🏗️ Arquitectura del Sistema
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Angular SPA   │────│  .NET Core API  │────│   SQLite DB     │
-│   (Frontend)    │    │   (Backend)     │    │  (Database)     │
+│   Angular SPA   │────│  .NET Core API  │────│   SQL Server    │
+│   (Frontend)    │    │   (Backend)     │    │   (Database)    │
+│   Puerto 4200   │    │   Puerto 5163   │    │   Puerto 1433   │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
          │                       │                       │
          │              ┌─────────────────┐              │
-         └──────────────│  JWT Auth       │──────────────┘
-                        │  + CORS         │
+         │              │  JWT Auth       │              │
+         │              │  + CORS         │              │
+         │              └─────────────────┘              │
+         │                                               │
+         │              ┌─────────────────┐              │
+         └──────────────│ Report Service  │──────────────┘
+                        │ Python FastAPI  │
+                        │  Puerto 8000    │
                         └─────────────────┘
+```  
+
+##  URLs de Producción (VPS)
+
+- **Frontend:** http://104.131.96.162:4200
+- **Admin Panel:** http://104.131.96.162:4200/admin
+- **API Swagger:** http://104.131.96.162:5163/swagger
+- **Reports API:** http://104.131.96.162:8000/docs
+
+**Credenciales de Admin:**
+- Usuario: `admin`
+- Password: `Admin123!`
+
+##  Características Principales
+
+###  Sistema de Gestión
+- **Panel de Administración**: Interfaz completa para gestionar equipos, jugadores y partidos
+- **Autenticación JWT**: Sistema seguro de login para administradores
+- **Gestión de Equipos**: CRUD completo con información detallada
+- **Gestión de Jugadores**: Registro y administración de jugadores por equipo
+- **Gestión de Partidos**: Creación y seguimiento de partidos
+- **Marcador en Tiempo Real**: Visualización dinámica de marcadores
+
+###  Sistema de Reportería (NUEVO)
+- **RF-REP-01**: Reporte de Equipos con estadísticas
+- **RF-REP-02**: Jugadores por Equipo con análisis
+- **RF-REP-03**: Historial de Partidos con métricas
+- **RF-REP-04**: Roster por Partido con información detallada
+- **RF-REP-05**: Estadísticas por Jugador con rendimiento
+
+###  Seguridad Implementada
+- **RNF-REP-02**: Solo usuarios autenticados con permisos de administrador pueden generar reportes
+- **Validación en Frontend**: Verificación de rol antes de mostrar opciones
+- **Protección de Rutas**: Acceso restringido a funcionalidades administrativas
+- **Redirección Automática**: Si no es admin, redirige al login
+
+##  Arquitectura del Sistema
+
 ```
-
-## Cumplimiento de Requerimientos
-
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Angular SPA   │────│  .NET Core API  │────│   SQL Server    │
+│   (Frontend)    │    │   (Backend)     │    │   (Database)    │
+│   Puerto 4200   │    │   Puerto 5163   │    │   Puerto 1433   │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         │              ┌─────────────────┐              │
+         │              │  JWT Auth       │              │
+         │              │  + CORS         │              │
+         │              └─────────────────┘              │
+         │                                               │
+         │              ┌─────────────────┐              │
+         └──────────────│ Report Service  │──────────────┘
+                        │ Python FastAPI  │
+                        │  Puerto 8000    │
+                        └─────────────────┘
 ### Requerimientos Funcionales (11/12 - 92%)
 - **RF-ADM-01:** Login seguro para administradores
 - **RF-ADM-02:** Acceso protegido al panel administrativo
