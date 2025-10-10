@@ -1,0 +1,6 @@
+basketball-upload-temp\
+.git\
+*.tmp
+*.temp
+exclude-temp.txt
+safe-upload-lfs.bat

@@ -1,0 +1,43 @@
+@BasketballScoreboardAPI_HostAddress = http://localhost:5163
+
+# Test crear nuevo partido
+POST {{BasketballScoreboardAPI_HostAddress}}/api/partidos
+Content-Type: application/json
+
+{
+  "equipoLocal": "Lakers",
+  "equipoVisitante": "Warriors"
+}
+
+###
+
+# Test obtener partidos
+GET {{BasketballScoreboardAPI_HostAddress}}/api/partidos
+Accept: application/json
+
+###
+
+# Test actualizar partido (usar ID del partido creado)
+PUT {{BasketballScoreboardAPI_HostAddress}}/api/partidos/1
+Content-Type: application/json
+
+{
+  "localScore": 25,
+  "visitanteScore": 18,
+  "cuarto": 2,
+  "tiempoRestante": 480
+}
+
+###
+
+# Test actualizar faltas
+POST {{BasketballScoreboardAPI_HostAddress}}/api/faltas
+Content-Type: application/json
+
+{
+  "partidoId": 1,
+  "localFouls": 3,
+  "visitanteFouls": 2
+}
+
+###

@@ -1,0 +1,63 @@
+<div class="reportes-container">
+  <h2>📊 Reportes del Sistema</h2>
+  <p class="subtitle">Solo administradores pueden generar reportes</p>
+
+  <div class="reportes-grid">
+    
+    <!-- RF-REP-01: Reporte de Equipos -->
+    <div class="reporte-card">
+      <div class="reporte-icon">🏀</div>
+      <h3>Reporte de Equipos</h3>
+      <p>Lista completa de todos los equipos registrados</p>
+      <button class="btn-reporte" (click)="generarReporteEquipos()">
+        📄 Generar PDF
+      </button>
+    </div>
+
+    <!-- RF-REP-02: Reporte de Jugadores -->
+    <div class="reporte-card">
+      <div class="reporte-icon">👥</div>
+      <h3>Jugadores por Equipo</h3>
+      <p>Lista de jugadores de un equipo específico</p>
+      <button class="btn-reporte" (click)="generarReporteJugadores()">
+        📄 Generar PDF
+      </button>
+    </div>
+
+    <!-- RF-REP-03: Reporte de Partidos -->
+    <div class="reporte-card">
+      <div class="reporte-icon">🏆</div>
+      <h3>Historial de Partidos</h3>
+      <p>Historial completo de todos los partidos</p>
+      <button class="btn-reporte" (click)="generarReportePartidos()">
+        📄 Generar PDF
+      </button>
+    </div>
+
+    <!-- RF-REP-04: Reporte de Roster -->
+    <div class="reporte-card">
+      <div class="reporte-icon">📋</div>
+      <h3>Roster por Partido</h3>
+      <p>Roster de jugadores en un partido específico</p>
+      <button class="btn-reporte" (click)="generarReporteRoster()">
+        📄 Generar PDF
+      </button>
+    </div>
+
+    <!-- RF-REP-05: Reporte de Estadísticas -->
+    <div class="reporte-card">
+      <div class="reporte-icon">📈</div>
+      <h3>Estadísticas por Jugador</h3>
+      <p>Estadísticas detalladas de un jugador</p>
+      <button class="btn-reporte" (click)="generarReporteEstadisticas()">
+        📄 Generar PDF
+      </button>
+    </div>
+
+  </div>
+
+  <div class="info-box">
+    <h4>🔒 Acceso Restringido</h4>
+    <p>Solo usuarios con permisos de administrador pueden generar y descargar reportes del sistema.</p>
+  </div>
+</div>

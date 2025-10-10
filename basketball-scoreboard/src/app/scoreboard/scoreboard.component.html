@@ -1,0 +1,55 @@
+<div class="scoreboard-container">
+  <div class="game-layout">
+    <!-- Local Team -->
+    <div class="team-card local-team">
+      <div class="team-header">
+        <h2>🏀 Local</h2>
+      </div>
+      <div class="team-content">
+        <div class="score-display">{{ localScore }}</div>
+        <div class="button-group">
+          <button class="btn btn-success" (click)="addPoints('local', 1)" (click)="animateScore()">+1</button>
+          <button class="btn btn-info" (click)="addPoints('local', 2)" (click)="animateScore()">+2</button>
+          <button class="btn btn-primary" (click)="addPoints('local', 3)" (click)="animateScore()">+3</button>
+          <button class="btn btn-danger" (click)="addPoints('local', -1)" (click)="animateScore()">-1</button>
+        </div>
+        <div class="fouls-section">
+          <div class="fouls-display">Faltas: {{ localFouls }}</div>
+          <button class="btn btn-warning" (click)="addFoul('local')">+Falta</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Basketball Court -->
+    <div class="court-section">
+      <div class="court-container">
+        <img src="assets/Cancha.jpg" alt="Basketball Court" class="court-image">
+        <div class="court-elements">
+          <img src="assets/Pelota.png" alt="Basketball" class="ball-image">
+          <img src="assets/Player.png" alt="Player 1" class="player1-image">
+          <img src="assets/Player2.png" alt="Player 2" class="player2-image">
+        </div>
+      </div>
+    </div>
+
+    <!-- Visitante Team -->
+    <div class="team-card visitante-team">
+      <div class="team-header">
+        <h2>🏀 Visitante</h2>
+      </div>
+      <div class="team-content">
+        <div class="score-display">{{ visitanteScore }}</div>
+        <div class="button-group">
+          <button class="btn btn-success" (click)="addPoints('visitante', 1)" (click)="animateScore()">+1</button>
+          <button class="btn btn-info" (click)="addPoints('visitante', 2)" (click)="animateScore()">+2</button>
+          <button class="btn btn-primary" (click)="addPoints('visitante', 3)" (click)="animateScore()">+3</button>
+          <button class="btn btn-danger" (click)="addPoints('visitante', -1)" (click)="animateScore()">-1</button>
+        </div>
+        <div class="fouls-section">
+          <div class="fouls-display">Faltas: {{ visitanteFouls }}</div>
+          <button class="btn btn-warning" (click)="addFoul('visitante')">+Falta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

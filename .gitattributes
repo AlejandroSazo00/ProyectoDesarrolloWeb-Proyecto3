@@ -1,0 +1,8 @@
+*.dll filter=lfs diff=lfs merge=lfs -text
+*.exe filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.tar.gz filter=lfs diff=lfs merge=lfs -text
+node_modules/** filter=lfs diff=lfs merge=lfs -text
+basketball-scoreboard/node_modules/** filter=lfs diff=lfs merge=lfs -text
+BasketballScoreboardAPI/bin/** filter=lfs diff=lfs merge=lfs -text
+BasketballScoreboardAPI/obj/** filter=lfs diff=lfs merge=lfs -text
